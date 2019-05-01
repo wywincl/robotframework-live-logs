@@ -2,9 +2,9 @@ import os
 
 import webbrowser
 
-class LogListener:
+class LiveLogs:
 
-    ROBOT_LISTENER_API_VERSION = 3
+    ROBOT_LISTENER_API_VERSION = 2
 
     def __init__(self):
 
@@ -51,7 +51,7 @@ class LogListener:
                     </tr>
                 </table>
                 </br>
-        
+        </html>
         """
 
         live_logs_file.write(message)
@@ -62,8 +62,8 @@ class LogListener:
 
         webbrowser.open_new_tab(filename)
 
-    def start_suite(self, data, result):
-        self.test_count = len(data.tests)
+    def start_suite(self, name, attrs):
+        self.test_count = len(attrs['tests'])
 
         if self.test_count != 0:
 
@@ -76,21 +76,25 @@ class LogListener:
                         <th style="background-color:LIGHTSTEELBLUE">Test Name</th>
                         <th style="background-color:LIGHTSTEELBLUE">Test Status</th>
                         <th style="background-color:LIGHTSTEELBLUE">Message</th>
+                        <th style="background-color:LIGHTSTEELBLUE">KW Name</th>
+                        <th style="background-color:LIGHTSTEELBLUE">KW Status</th>
                     </tr>
                     <tr>
-                        <td style="background-color:LAVENDER">%s ( %s )</td>
+                        <td style="background-color:LAVENDER"><strong>%s (%s)</strong></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                     </tr>
                 </table>
 
-            """ %(str(data.name),str(len(data.tests)))
+            """ %(str(name), str(self.test_count))
 
             live_logs_file.write(message)
             live_logs_file.close()
     
-    def start_test(self, data, test):
+    def start_test(self, name, attrs):
         if self.test_count != 0:
             live_logs_file = open('LiveLogs.html','a+')
 
@@ -98,18 +102,42 @@ class LogListener:
                 <table>
                     <tr>
                         <td></td>
-                        <td style="background-color:LIGHTBLUE">%s</td>
+                        <td style="background-color:LIGHTBLUE"><strong>%s</strong></td>
                         <td></td>
-                        <td></td>                        
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </table>
 
-            """ %(str(test))
+            """ %(str(name))
 
             live_logs_file.write(message)
             live_logs_file.close()
     
-    def end_test(self, data, test):
+    def end_keyword(self, name, attrs):
+        if self.test_count != 0:
+
+            live_logs_file = open('LiveLogs.html','a+')
+
+            message = """
+                <table>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: left;">%s</td>
+                        <td>%s</td>
+                    </tr>
+                </table>
+
+            """ %(str(attrs['kwname']), str(attrs['status']))
+
+            live_logs_file.write(message)
+            live_logs_file.close()
+
+    def end_test(self, name, attrs):
         if self.test_count != 0:
             live_logs_file = open('LiveLogs.html','a+')
 
@@ -119,16 +147,18 @@ class LogListener:
                         <td></td>
                         <td></td>
                         <td style="background-color:BEIGE"><strong>%s</strong></td>
-                        <td style="text-align: left;">%s</td>                        
+                        <td style="text-align: left;">%s</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </table>
 
-            """ %(str(test.status), str(test.message))
+            """ %(str(attrs['status']), str(attrs['message']))
 
             live_logs_file.write(message)
             live_logs_file.close()
 
-    def end_suite(self, data, suite):
+    def end_suite(self, name, attrs):
         if self.test_count != 0:
 
             live_logs_file = open('LiveLogs.html','a+')
@@ -141,7 +171,7 @@ class LogListener:
                 </table>
                 </br>
 
-            """ %(str(data.name),str(suite.status))
+            """ %(str(name),str(attrs['status']))
 
             live_logs_file.write(message)
             live_logs_file.close()
