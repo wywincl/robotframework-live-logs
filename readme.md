@@ -1,6 +1,6 @@
 # Robotframework Live Logs
 
-This repo consist of generating live logs while execution is in progress
+This repo consist of generating live logs while execution is in progress [![HitCount](http://hits.dwyl.io/adiralashiva8/robotframework-live-logs.svg)](http://hits.dwyl.io/adiralashiva8/robotframework-live-logs)
 
 Steps to Use:
 
