@@ -4,10 +4,13 @@ This repo consist of generating live logs while execution is in progress
 
 Steps to Use:
 
- - Step 1: Download this repo
- - Step 2: Copy `LiveLogs.py` to your project
+ - Step 1: Download or clone this repo
+ 
+ - Step 2: Copy `LiveLogsListener.py` to your project
+
  - Step 3: Execute test case/suites using LogListener
-   > - `robot --listener LiveLogs.py Tests` 
+   > - `robot --listener LiveLogsListener.py Tests` 
+
  - Step 4: A new browser will be opened with logs
    > Note: Page refresh's for every 5 seconds.
    > - Users can modify reload time from .py file
@@ -17,7 +20,7 @@ Steps to Use:
 
 Available Logs:
 
- - LiveLogs.py --> Suite, Test and Keyword status
+ - LiveLogsListener.py --> Suite, Test and Keyword status
     > Uses ROBOT_LISTENER_API_VERSION = 2
 
  - LogListener.py --> Suite and Test status
@@ -27,4 +30,4 @@ Available Logs:
 
 *Screenshot*
 
-<img src="https://i.ibb.co/ncYCMcM/LiveLogs.jpg" alt="LiveLogs">
+<img src="/LiveLogs.jpg" alt="LiveLogs">

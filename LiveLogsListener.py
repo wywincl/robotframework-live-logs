@@ -2,7 +2,7 @@ import os
 
 import webbrowser
 
-class LiveLogs:
+class LiveLogsListener:
 
     ROBOT_LISTENER_API_VERSION = 2
 
@@ -21,7 +21,7 @@ class LiveLogs:
                         font-family: Consolas, Helvetica, Arial, sans-serif;
                         table-layout: fixed;
                         width: 100%;
-                        
+                        font-size: 14px;
                     }
 
                     td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */

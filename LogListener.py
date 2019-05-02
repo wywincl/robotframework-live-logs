@@ -21,6 +21,7 @@ class LogListener:
                         font-family: Consolas, Helvetica, Arial, sans-serif;
                         table-layout: fixed;
                         width: 100%;
+                        font-size: 14px;
                         
                     }
 
